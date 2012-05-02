@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_logined
-  	if session(:email)
+  	if session[:email]
   		begin
   			@user = UserInfo.find_all_by_user_id(session[:email])
   		rescue ActiveRecord::RecordNotFound
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   	unless @user
   		flash[:referer] = request.fullpath
-  		redirection_to :controller => 'login', :action => 'index'
+  		redirect_to :controller => 'login', :action => 'index'
   	end
   end
 end

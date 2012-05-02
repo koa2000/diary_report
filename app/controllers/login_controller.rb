@@ -1,7 +1,9 @@
-#coding: utf-8
-skip_before_filter :check_logined 
+#coding: utf-8 
 class LoginController < ApplicationController
+  skip_before_filter :check_logined
+  
   def index
+
   end
   def auth
     user = User.authenticate(params[:email])
