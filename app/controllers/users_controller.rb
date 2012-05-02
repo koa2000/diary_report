@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   before_filter :check_logined, :only => ['show']
   # GET /users
   # GET /users.json
@@ -83,8 +82,6 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-    
   private
   def check_logined
     if session[:user] then

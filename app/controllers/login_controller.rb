@@ -1,7 +1,6 @@
 #coding: utf-8
 
 class LoginController < ApplicationController
-
   def index
   end
   def auth
