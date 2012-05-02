@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+
+  before_filter :check_logined, :only => ['show']
   # GET /users
   # GET /users.json
   def index
@@ -9,6 +11,7 @@ class UsersController < ApplicationController
       format.json { render json: @users }
     end
   end
+  
 
   # GET /users/1
   # GET /users/1.json
@@ -78,6 +81,23 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
+    end
+  end
+  
+    
+  private
+  def check_logined
+    if session[:user] then
+      begin
+        @user = User.find(session[:user])
+      rescue ActiveRecord::RecordNotFound
+        reset_session
+      end
+    end
+    
+    unless @user
+      flash[:referer] = request.fullpath
+      redirect_to :controller => 'login', :action => 'index'
     end
   end
 end
