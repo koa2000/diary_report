@@ -1,5 +1,5 @@
 #coding: utf-8
-
+skip_before_filter :check_logined 
 class LoginController < ApplicationController
   def index
   end
